@@ -145,7 +145,7 @@ async function main() {
       const freelanceDb = projectBlocks.results.find(
         b =>
           b.type === "child_database" &&
-          b.child_database?.title === "فريق الفرعي لانس"
+          b.child_database?.title === "فريق الفري لانس"
       );
 
       const purchasesDb = projectBlocks.results.find(
