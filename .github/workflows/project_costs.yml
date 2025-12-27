@@ -1,0 +1,32 @@
+name: Project Costs Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"   # ⏱️ كل 5 دقائق
+
+jobs:
+  calculate-costs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm install
+        # لو ما عندك package.json حاليًا:
+        # احذف هذا الستيب
+
+      - name: Run Project Costs Calculator
+        run: node src/index.js
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          MANAGERS_DB: ${{ secrets.MANAGERS_DB }}
+          PROJECTS_DB: ${{ secrets.PROJECTS_DB }}
